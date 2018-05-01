@@ -1,8 +1,8 @@
 # pgConnect
 Connect to Postgres Database using JSON configuration file    
 
-Postgres driver used:   [github.com/lib/pq](github.com/lib/pq)  
-Configuration go package used:   [github.com/spf13/viper](github.com/spf13/viper)
+Postgres driver used: &nbsp;  [github.com/lib/pq](github.com/lib/pq)    
+Configuration go package used: &nbsp;  [github.com/spf13/viper](github.com/spf13/viper)
 
 This code requires a JSON configuration file with database credentials.  
 
@@ -12,12 +12,12 @@ filename - dbconfig.json
 
 ```json
 {	  
-	"dbHost": "localhost",  
-	"dbPort": 5432,  
-	"dbUser": "postgres",  
-	"dbPassword": "password",  
-	"dbName": "my_database_name",  
-	"dbSSLMode": "disable"  
+  "dbHost": "localhost",  
+  "dbPort": 5432,  
+  "dbUser": "postgres",  
+  "dbPassword": "password",  
+  "dbName": "my_database_name",  
+  "dbSSLMode": "disable"  
 }
 ```         
 
