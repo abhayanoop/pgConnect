@@ -5,8 +5,11 @@ import (
 	"errors"
 	"fmt"
 
+	_ "github.com/lib/pq"
 	"github.com/spf13/viper"
 )
+
+// Go structure to unmarshal JSON config file
 
 type DBConfig struct {
 	DBHost     string `json:"dbHost"`
@@ -16,6 +19,10 @@ type DBConfig struct {
 	DBName     string `json:"dbName"`
 	DBSSLMode  string `json:"dbSSLMode"`
 }
+
+// Opens a postgres DB connection with credentials as given in a JSON config file
+// The complete path with extension of the config file should be given as argument.
+// Refer README.md for example JSON
 
 func GetPostgresDB(configPath string) (db *sql.DB, err error) {
 
@@ -32,13 +39,12 @@ func GetPostgresDB(configPath string) (db *sql.DB, err error) {
 		return
 	}
 
-	psqlInfo := fmt.Sprintf(
+	pgInfo := fmt.Sprintf(
 		"host=%s port=%d user=%s password=%s dbname=%s sslmode=%s",
 		config.DBHost, config.DBPort, config.DBUser, config.DBPassword,
 		config.DBName, config.DBSSLMode)
 
-	db, err = sql.Open("postgres", psqlInfo)
-	if err != nil {
+	if db, err = sql.Open("postgres", pgInfo); err != nil {
 		return
 	}
 
