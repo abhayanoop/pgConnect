@@ -21,12 +21,14 @@ filename - dbconfig.json
 }
 ```         
 
-The complete path with extension of this JSON file will be the configPath argument  
+The path(s) of this JSON file as a slice is the configPaths argument.
+Multiple config paths can be provided priority based in the slice.
+The filename without extension is the configName argument.
 
 Example function call:   
   
 ```
-db, err := pgConnect.GetPostgresDB("/home/admin/dbconfig.json")
+db, err := pgConnect.GetPostgresDB([]string{".", $HOME}, "config")
 if err != nil {
   <Handle error>
 }  

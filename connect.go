@@ -21,12 +21,16 @@ type DBConfig struct {
 }
 
 // Opens a postgres DB connection with credentials as given in a JSON config file
-// The complete path with extension of the config file should be given as argument.
+// The paths in order of priority and name of config file (without extension) should be given as argument.
 // Refer README.md for example JSON
 
-func GetPostgresDB(configPath string) (db *sql.DB, err error) {
+func GetPostgresDB(configPaths []string, configName string) (db *sql.DB, err error) {
 
-	viper.SetConfigFile(configPath)
+	for _, path := range configPaths {
+		viper.AddConfigPath(path)
+	}
+
+	viper.SetConfigName(configName)
 
 	if err = viper.ReadInConfig(); err != nil {
 		err = errors.New("Config file not found in path. Error - " + err.Error())
